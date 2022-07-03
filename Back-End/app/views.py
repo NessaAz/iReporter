@@ -1,11 +1,27 @@
-from django.shortcuts import render
-from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.exceptions import AuthenticationFailed
 from .serializers import ClientSerializer,UserSerializer,AdminSerializer
 from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from .models import User
+
 
 # Create your views here.
-class AdminSignUpView(generics.GenericAPIView):
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        'admin',
+        'client',
+        'token',
+        'token/refresh/',
+    ]
+    return Response(routes)
+
+class AdminSignUpView(APIView):
     serializer_class=AdminSerializer
     def post(self,request,*args,**kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -18,7 +34,7 @@ class AdminSignUpView(generics.GenericAPIView):
         }
         return Response(context)
 
-class ClientSignUpView(generics.GenericAPIView):
+class ClientSignUpView(APIView):
     serializer_class=ClientSerializer
     def post(self,request,*args,**kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -30,3 +46,16 @@ class ClientSignUpView(generics.GenericAPIView):
             'message':'account made successfully'
         }
         return Response(context)
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
