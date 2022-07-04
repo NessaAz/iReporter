@@ -1,14 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import generics
-from rest_framework.decorators import api_view
-from rest_framework.exceptions import AuthenticationFailed
-from .serializers import ClientSerializer,UserSerializer,AdminSerializer
+from .serializers import ClientSerializer, UserSerializer, AdminSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
-from .models import User
+from django.http import HttpResponse, JsonResponse
+from .models import RedFlag, Intervention
+from .serializers import RedFlagSerializer, InterventionSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.parsers import JSONParser
 
 
 # Create your views here.
@@ -22,31 +23,36 @@ def getRoutes(request):
     ]
     return Response(routes)
 
+
 class AdminSignUpView(generics.GenericAPIView):
-    serializer_class=AdminSerializer
-    def post(self,request,*args,**kwargs):
+    serializer_class = AdminSerializer
+
+    def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user=serializer.save()
+        user = serializer.save()
         context = {
             'user': UserSerializer(user, context=self.get_serializer_context()).data,
             'token': Token.objects.get(user=user).key,
-            'message':'account made successfully'
+            'message': 'account made successfully'
         }
         return Response(context)
 
+
 class ClientSignUpView(generics.GenericAPIView):
-    serializer_class=ClientSerializer
-    def post(self,request,*args,**kwargs):
+    serializer_class = ClientSerializer
+
+    def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user=serializer.save()
+        user = serializer.save()
         context = {
             'user': UserSerializer(user, context=self.get_serializer_context()).data,
             'token': Token.objects.get(user=user).key,
-            'message':'account made successfully'
+            'message': 'account made successfully'
         }
         return Response(context)
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -58,15 +64,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-from django.http import HttpResponse, JsonResponse
-from .models import RedFlag, Intervention
-from .serializers import RedFlagSerializer, InterventionSerializer
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.parsers import JSONParser
 
 
 # Create your views here.
