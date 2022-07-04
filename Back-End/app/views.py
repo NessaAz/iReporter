@@ -14,10 +14,10 @@ from .models import User
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
-        'admin',
-        'client',
-        'token',
-        'token/refresh/',
+        'api/admin',
+        'api/client',
+        'api/token',
+        'api/token/refresh/',
     ]
     return Response(routes)
 
