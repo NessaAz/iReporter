@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 from .serializers import ClientSerializer,UserSerializer,AdminSerializer
@@ -21,7 +22,7 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-class AdminSignUpView(APIView):
+class AdminSignUpView(generics.GenericAPIView):
     serializer_class=AdminSerializer
     def post(self,request,*args,**kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -34,7 +35,7 @@ class AdminSignUpView(APIView):
         }
         return Response(context)
 
-class ClientSignUpView(APIView):
+class ClientSignUpView(generics.GenericAPIView):
     serializer_class=ClientSerializer
     def post(self,request,*args,**kwargs):
         serializer = self.get_serializer(data=request.data)
