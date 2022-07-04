@@ -8,4 +8,4 @@ admin.site.register(Client),
 admin.site.register(User),
 admin.site.register(RedFlag),
 admin.site.register(Intervention),
-admin.site.register(Status)
+

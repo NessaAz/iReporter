@@ -43,6 +43,13 @@ class RedFlag(models.Model):
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
     user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='flags')
+    location = models.TextField(blank=True)
+    status = (
+        ('investigation', 'investigation'),
+        ('rejected', 'rejected'),
+        ('resolved', 'resolved'),
+    )
+    stages = models.CharField(max_length=20, choices=status, default='')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -63,6 +70,13 @@ class Intervention(models.Model):
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
     user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='interventions')
+    status = (
+        ('investigation', 'investigation'),
+        ('rejected', 'rejected'),
+        ('resolved', 'resolved'),
+    )
+    stages = models.CharField(max_length=20, choices=status, default='')
+    location = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -78,9 +92,5 @@ class Intervention(models.Model):
         self.delete()
 
 
-class Status(models.Model):
-    status = (
-        ('investigation', 'investigation'),
-        ('rejected', 'rejected'),
-        ('resolved', 'resolved'),
-    )
+
+
