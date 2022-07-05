@@ -1,0 +1,1 @@
+web: gunicorn iReporter.wsgi --log-file -

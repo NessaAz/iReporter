@@ -4,10 +4,21 @@ certifi==2022.6.15
 cloudinary==1.29.0
 dj-database-url==0.5.0
 Django==4.0.5
+<<<<<<< HEAD
 django-on-heroku==1.1.2
 django-rest-framework==0.1.0
 djangorestframework==3.13.1
 psycopg2-binary==2.9.3
+=======
+django-cors-headers==3.13.0
+django-heroku==0.3.1
+django-rest-framework==0.1.0
+djangorestframework==3.13.1
+djangorestframework-simplejwt==5.2.0
+gunicorn==20.1.0
+psycopg2==2.9.3
+PyJWT==2.4.0
+>>>>>>> 4b517a17f8ace32d19d50be11bd312ae8da6004b
 python-decouple==3.6
 pytz==2022.1
 six==1.16.0
