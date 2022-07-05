@@ -8,7 +8,8 @@ import {PostsService} from "../../services/posts.service";
   providers:[PostsService]
 })
 export class PostsComponent implements OnInit {
-  posts = [{id:1},{url:'testurl'},{title:'test'}, {info:'test'},{location:'location'}, {image:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}];
+  posts = [{id:1},{url:'testurl'},{title:'test'}, {info:'test'},{location:'location'}, {created:'time'},
+  {image:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}];
   selectedPost: any;
 
   constructor(private api: PostsService) {
@@ -25,6 +26,7 @@ export class PostsComponent implements OnInit {
       }
     )
   }
+
   postClicked = (post:any)=>{
     this.api.getOneRedFlag(post.id).subscribe(
       data => {
@@ -36,6 +38,8 @@ export class PostsComponent implements OnInit {
       }
     )
   }
+
+
   updatePost =() =>{
     this.api.updateRedFlag(this.selectedPost).subscribe(
       data => {
@@ -74,5 +78,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+
 
 }
