@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +33,4 @@ export class PostsService {
     return this.http.delete(this.baseurl + '/raiseflag/' + id + '/',
       {headers: this.httpHeaders});
   }
-
 }

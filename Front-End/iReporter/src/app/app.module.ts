@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './components/posts/posts.component';
 import {FormsModule} from "@angular/forms";
 import { InterventionsComponent } from './components/interventions/interventions.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { InterventionsComponent } from './components/interventions/interventions
         HttpClientModule,
         FormsModule,
     ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
