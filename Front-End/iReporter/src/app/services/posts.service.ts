@@ -29,5 +29,5 @@ export class PostsService {
     return this.http.delete(this.baseurl + '/raiseflag/' + id + '/',
       {headers: this.httpHeaders});
   }
-  constructor() { }
+  
 }
