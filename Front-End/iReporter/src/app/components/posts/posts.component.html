@@ -1,0 +1,14 @@
+<h3>List of Posts</h3>
+<ul *ngIf="posts">
+  <li *ngFor="let post of posts">
+    <h4 (click)="postClicked(post)">{{post.title}}</h4>
+  </li>
+</ul>
+<hr>
+Post Image <input type="file" [(ngModel)]="selectedPost.image"  id="imge"><br>
+Post Tittle <input type="text" [(ngModel)]="selectedPost.title"  id="title"><br>
+Info <input type="text" [(ngModel)]="selectedPost.info" id="desc"><br>
+location <input type="text" [(ngModel)]="selectedPost.location"   id="year"><br>
+<button class="btn btn-primary btn-sm m-3" *ngIf="selectedPost.id != -1" (click)="updatePost()">PUT</button>
+<button class="btn btn-success btn-sm m-3" *ngIf="selectedPost.id == -1" (click)="createPost()">POST</button>
+<button class="btn btn-danger btn-sm m-3" *ngIf="selectedPost.id != -1" (click)="deletePost()">DELETE</button>
