@@ -69,11 +69,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-# Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the iReporter')
-
-
 @api_view(['GET', 'POST', 'DELETE'])
 def flags_list(request, format=None):
     if request.method == 'GET':

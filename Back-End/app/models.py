@@ -39,17 +39,17 @@ class Client(models.Model):
 
 # Create your models here.
 class RedFlag(models.Model):
-    image = CloudinaryField()
+    image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
-    user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='flags')
+    user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='flags', null=True, blank=True)
     location = models.TextField(blank=True)
     status = (
         ('investigation', 'investigation'),
         ('rejected', 'rejected'),
         ('resolved', 'resolved'),
     )
-    stages = models.CharField(max_length=20, choices=status, default='')
+    stages = models.CharField(max_length=20, choices=status, default='', null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -66,7 +66,7 @@ class RedFlag(models.Model):
 
 
 class Intervention(models.Model):
-    image = CloudinaryField()
+    image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
     user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='interventions')
