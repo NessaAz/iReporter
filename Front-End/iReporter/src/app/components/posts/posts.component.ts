@@ -25,6 +25,7 @@ export class PostsComponent implements OnInit {
       }
     )
   }
+
   postClicked = (post:any)=>{
     this.api.getOneRedFlag(post.id).subscribe(
       data => {
@@ -36,6 +37,8 @@ export class PostsComponent implements OnInit {
       }
     )
   }
+
+
   updatePost =() =>{
     this.api.updateRedFlag(this.selectedPost).subscribe(
       data => {
@@ -74,5 +77,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+
 
 }
