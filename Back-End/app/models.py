@@ -25,6 +25,11 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Admin(models.Model):
     user = models.OneToOneField(User, related_name='admin', on_delete=models.CASCADE)
+    fullname = models.CharField(max_length=80, blank=True, null=True)
+    organisation = models.CharField(max_length=100, blank=True, null=True)
+    bio = models.TextField(max_length=254, blank=True, null=True)
+    profile_pic = CloudinaryField(default='https://res.cloudinary.com/dpww3jwgm/image/upload/v1654722449/default.png')
+    location = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return str(self.user.username)
@@ -32,6 +37,11 @@ class Admin(models.Model):
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='client')
+    fullname = models.CharField(max_length=80, blank=True, null=True)
+    organisation = models.CharField(max_length=100, blank=True, null=True)
+    bio = models.TextField(max_length=254, blank=True, null=True)
+    profile_pic = CloudinaryField(default='https://res.cloudinary.com/dpww3jwgm/image/upload/v1654722449/default.png')
+    location = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return str(self.user.username)
@@ -39,7 +49,8 @@ class Client(models.Model):
 
 # Create your models here.
 class RedFlag(models.Model):
-    image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
+    image = CloudinaryField(blank=True, null=True,
+                            default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
     user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='flags', null=True, blank=True)
@@ -66,17 +77,18 @@ class RedFlag(models.Model):
 
 
 class Intervention(models.Model):
-    image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
+    image = CloudinaryField(blank=True, null=True,
+                            default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
-    user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='interventions',  null=True, blank=True)
+    user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='interventions', null=True, blank=True)
     status = (
         ('investigation', 'investigation'),
         ('rejected', 'rejected'),
         ('resolved', 'resolved'),
     )
-    stages = models.CharField(max_length=20, choices=status, default='',  null=True)
-    location = models.TextField(blank=True,  null=True)
+    stages = models.CharField(max_length=20, choices=status, default='', null=True)
+    location = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -90,7 +102,3 @@ class Intervention(models.Model):
 
     def delete_intervention(self):
         self.delete()
-
-
-
-

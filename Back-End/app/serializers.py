@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from . import models
-from .models import RedFlag, Intervention
+from .models import RedFlag, Intervention, Admin, Client
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,4 +74,16 @@ class InterventionSerializer(serializers.ModelSerializer):
 class RedFlagSerializer(serializers.ModelSerializer):
     class Meta:
         model = RedFlag
+        fields = '__all__'
+
+
+class ClientProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+class AdminProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Admin
         fields = '__all__'
