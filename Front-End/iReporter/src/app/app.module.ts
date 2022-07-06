@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './components/posts/posts.component';
 import {FormsModule} from "@angular/forms";
 import { InterventionsComponent } from './components/interventions/interventions.component';
-import { from } from 'rxjs';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
     InterventionsComponent,
+    TimePipe,
   ],
     imports: [
         BrowserModule,
@@ -22,6 +23,6 @@ import { from } from 'rxjs';
     ],
 
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
