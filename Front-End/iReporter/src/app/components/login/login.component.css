@@ -11,8 +11,8 @@ h6 {
 }
 .login-body {
     width: 350px;
-    margin-top: 20%;
-    margin-left: 30%;
+    margin-top: 22%;
+    margin-left: 35%;
     padding-top: 10%;
     padding: 7%;
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
@@ -56,8 +56,8 @@ a {
     text-align: center;
 }
 img{
-    height: 700px;
-    width: 600px;
+    height: 620px;
+    width: 520px;
     padding-bottom: 12px; 
     margin-right: 20%;
   }

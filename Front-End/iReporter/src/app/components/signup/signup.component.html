@@ -3,24 +3,24 @@
     
     <div class="col-lg-6 col-md-6 col-sm-12">
       <div class="image fluid">
-        <img src="assets/" alt="">
+        <img src="assets/stopcorrupt.jpg" alt="">
       </div>
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="panel panel-default signin-body">
+      <div class="panel panel-default signup-body">
         <div class="panel-heading">
-          <h4 class="text-center">Create an account</h4>
+          <h4 class="text-center">Create Account</h4>
         </div>
         <div class="panel-body">
           <form>
           <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
-            <label class="label" for="username">Username</label>
-            <input type="text" #username class="form-control" id="username" placeholder="Username">
+            <label class="label" for="username">First Name</label>
+            <input type="text" #username class="form-control" id="firstname" placeholder="Firstname">
           </div>
           <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
-            <label class='label'for="password">Password</label>
-            <input type="password" #password class="form-control" id="password" placeholder="Password">
+            <label class="label" for="username">Last Name</label>
+            <input type="text" #username class="form-control" id="lastname" placeholder="Lastname">
           </div>
             <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
               <label class="label" for="username">Username</label>
@@ -29,7 +29,7 @@
             <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
               <label class='label'for="password">Password</label>
               <input type="password" #password class="form-control" id="password" placeholder="Password">
-              <input type="submit" class="btn  btn-primary login-btn btn-sm mt-3" value="Create account">
+              <a routerLink="/dashboard"><input type="submit" class="btn  btn-primary login-btn btn-sm mt-3" value="Create account"></a>
             </div>
         </form>
     </div>
