@@ -42,7 +42,7 @@ class RedFlag(models.Model):
     image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
-    user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='flags', null=True, blank=True)
+    user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='flags', null=True, blank=True)
     location = models.TextField(blank=True)
     status = (
         ('investigation', 'investigation'),
@@ -69,7 +69,7 @@ class Intervention(models.Model):
     image = CloudinaryField(blank=True, null=True, default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
-    user = models.OneToOneField(Client, on_delete=models.CASCADE, related_name='interventions',  null=True, blank=True)
+    user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='interventions',  null=True, blank=True)
     status = (
         ('investigation', 'investigation'),
         ('rejected', 'rejected'),
