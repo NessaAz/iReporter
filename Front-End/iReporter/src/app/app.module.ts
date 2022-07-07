@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AdminSignupComponent } from './components/admin-signup/admin-signup.component';
 import { InterventionsComponent } from './components/interventions/interventions.component';
 import { TimePipe } from './pipes/time.pipe';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TimePipe } from './pipes/time.pipe';
     AdminSignupComponent,
     PostsComponent,
     TimePipe,
+    ProfilesComponent,
   ],
     imports: [
         AppRoutingModule,

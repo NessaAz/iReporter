@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +19,7 @@ export class SignupComponent implements OnInit {
   registerUser(){
     this.authService.registerUser(this.register).subscribe(
       response=> {
-        alert('User has been registed successfully!')
+        alert('User has been registered successfully!')
       },
       error=> console.log (error)
     );
