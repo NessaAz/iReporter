@@ -78,7 +78,7 @@ class RedFlag(models.Model):
 
 class Intervention(models.Model):
     image = CloudinaryField(blank=True, null=True,
-                            default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
+    default='https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg')
     title = models.CharField(max_length=250, blank=True)
     info = models.CharField(max_length=1050, blank=True)
     user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='interventions', null=True, blank=True)
