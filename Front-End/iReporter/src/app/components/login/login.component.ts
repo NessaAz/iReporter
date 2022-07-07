@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,10 @@ import {AuthService} from "../../services/auth.service";
 export class LoginComponent implements OnInit {
   login: any;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
+  goPost() {
+    this.router.navigate(['/', 'redflags']);
+  }
 
   ngOnInit(): void {
     this.login= {username:'', password:''};
@@ -18,8 +22,8 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.authService.loginUsers(this.login).subscribe(
       response=> {
-
-        alert('User has been Login successfully!')
+        alert('Login successfully!')
+        this.goPost()
       },
       error=>{
         alert('You have entered an invalid username or password!')

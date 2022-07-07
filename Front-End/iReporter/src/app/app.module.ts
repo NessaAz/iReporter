@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AdminSignupComponent } from './components/admin-signup/admin-signup.component';
 import { InterventionsComponent } from './components/interventions/interventions.component';
 import { TimePipe } from './pipes/time.pipe';
+import { LandingComponent } from './components/landing/landing.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     AdminSignupComponent,
     PostsComponent,
     TimePipe,
+    LandingComponent,
     ProfilesComponent,
   ],
     imports: [
