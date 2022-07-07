@@ -4,8 +4,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.http import HttpResponse, JsonResponse
-from .models import RedFlag, Intervention
-from .serializers import RedFlagSerializer, InterventionSerializer
+from .models import RedFlag, Intervention, Admin, Client
+from .serializers import RedFlagSerializer, InterventionSerializer, ClientProfileSerializer, AdminProfileSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -17,7 +17,9 @@ from rest_framework.parsers import JSONParser
 def getRoutes(request):
     routes = [
         'api/admin',
+        'api/adminprofile',
         'api/client',
+        'api/clientprofile',
         'api/token',
         'api/token/refresh/',
     ]
@@ -142,4 +144,80 @@ def intervention_detail(request, id, format=None):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         intervention.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+def admins_list(request, format=None):
+    if request.method == 'GET':
+        admins = Admin.objects.all()
+        serializer = AdminProfileSerializer(admins, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = AdminProfileSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def admin_detail(request, id, format=None):
+    try:
+        admin = Admin.objects.get(pk=id)
+    except Admin.DoesNotExist:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = AdminProfileSerializer(admin)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = AdminProfileSerializer(admin, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        admin.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+def clients_list(request, format=None):
+    if request.method == 'GET':
+        clients = Client.objects.all()
+        serializer = ClientProfileSerializer(clients, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ClientProfileSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def client_detail(request, id, format=None):
+    try:
+        client = Client.objects.get(pk=id)
+    except Client.DoesNotExist:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ClientProfileSerializer(client)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ClientProfileSerializer(client, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        client.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
