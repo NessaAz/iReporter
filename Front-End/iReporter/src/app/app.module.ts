@@ -7,6 +7,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import {FormsModule} from "@angular/forms";
 import { InterventionsComponent } from './components/interventions/interventions.component';
 import { TimePipe } from './pipes/time.pipe';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { TimePipe } from './pipes/time.pipe';
     PostsComponent,
     InterventionsComponent,
     TimePipe,
+    LandingComponent,
   ],
     imports: [
         BrowserModule,
