@@ -14,6 +14,10 @@ urlpatterns = [
     path('api/flaglists', views.flags_list, name='flaglist'),
     path('api/interventions', views.interventions_list, name='interventions'),
     path('api/raiseflag/<int:id>/', views.flag_detail, name='flag'),
-    path('api/intervationrequest/<int:id>/', views.intervention_detail, name='intervationrequest')
+    path('api/intervationrequest/<int:id>/', views.intervention_detail, name='intervationrequest'),
+    path('api/adminprofiles', views.admins_list, name='admins'),
+    path('api/clientsprofiles', views.clients_list, name='clients'),
+    path('api/admins/<int:id>/', views.admin_detail, name='admin'),
+    path('api/clients/<int:id>/', views.client_detail, name='client'),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
