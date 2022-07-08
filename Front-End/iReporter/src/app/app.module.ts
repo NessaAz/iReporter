@@ -11,11 +11,7 @@ import { AdminSignupComponent } from './components/admin-signup/admin-signup.com
 import { InterventionsComponent } from './components/interventions/interventions.component';
 import { TimePipe } from './pipes/time.pipe';
 import { LandingComponent } from './components/landing/landing.component';
-<<<<<<< HEAD
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-=======
 import { ProfilesComponent } from './components/profiles/profiles.component';
->>>>>>> 9b773968fc79ebe5330ee3ced4cdb22dde2efd95
 
 @NgModule({
   declarations: [
@@ -27,11 +23,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     PostsComponent,
     TimePipe,
     LandingComponent,
-<<<<<<< HEAD
-    DashboardComponent,
-=======
     ProfilesComponent,
->>>>>>> 9b773968fc79ebe5330ee3ced4cdb22dde2efd95
   ],
     imports: [
         AppRoutingModule,

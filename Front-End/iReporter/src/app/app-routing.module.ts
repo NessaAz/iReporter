@@ -6,9 +6,10 @@ import { AdminSignupComponent } from './components/admin-signup/admin-signup.com
 import { PostsComponent } from './components/posts/posts.component';
 import { InterventionsComponent } from './components/interventions/interventions.component';
 import { ProfilesComponent } from "./components/profiles/profiles.component";
+import { LandingComponent } from './components/landing/landing.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent },
   {path: 'adminsignup', component: AdminSignupComponent },
