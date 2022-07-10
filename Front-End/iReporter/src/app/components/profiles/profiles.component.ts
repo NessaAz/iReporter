@@ -44,10 +44,11 @@ export class ProfilesComponent implements OnInit {
     this.api.updateClient(this.selectedProfile).subscribe(
       data => {
         this.getClientsProfiles();
-
+          alert("profile updated successfully")
       },
       error => {
         console.log(error)
+        alert("profile update failed")
       }
     )
   }

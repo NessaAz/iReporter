@@ -43,7 +43,7 @@ export class ProfilesService {
   }
 
   updateClient(client:any): Observable<any>{
-    const body = {profile_pic: client.profile_pic, fullname:client.fullname, organisation:client.organisation, location:client.location}
+    const body = {profile_pic: client.profile_pic, fullname:client.fullname, organisation:client.organisation, location:client.location, bio:client.bio }
     return this.http.put(this.baseurl+'/clients/' + client.id + '/', body,
       {headers: this.httpHeaders});
   }
