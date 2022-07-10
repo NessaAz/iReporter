@@ -22,6 +22,14 @@ def getRoutes(request):
         'api/clientprofile',
         'api/token',
         'api/token/refresh/',
+        'api/flaglists',
+        'api/interventions',
+        'api/raiseflag/<int:id>/',
+        'api/intervationrequest/<int:id>/',
+        'api/adminprofiles',
+        'api/clientsprofiles',
+        'api/admins/<int:id>/',
+        'api/clients/<int:id>/',
     ]
     return Response(routes)
 

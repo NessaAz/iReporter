@@ -37,7 +37,6 @@ export class ProfilesService {
   getAllClient(): Observable<any>{
     return this.http.get(this.baseurl+'/clientsprofiles', {headers: this.httpHeaders});
   }
-
   getOneClient(id:number): Observable<any>{
     return this.http.get(this.baseurl+'/clients/' + id + '/', {headers: this.httpHeaders});
   }
@@ -49,7 +48,8 @@ export class ProfilesService {
   }
 
   createClient(client:any): Observable<any>{
-    const body = {profile_pic: client.profile_pic, fullname:client.fullname, organisation:client.organisation, location:client.location }
+    const body = {user_id: client.user_id, profile_pic: client.profile_pic, fullname:client.fullname,
+      organisation:client.organisation, location:client.location, bio:client.bio }
     return this.http.post(this.baseurl+'/clientsprofiles', body,{headers: this.httpHeaders});
   }
 
