@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {InterventionsService} from "../../services/interventions.service";
+import {PostsService } from "../../services/posts.service";
 
 
 @Component({
   selector: 'app-interventions',
   templateUrl: './interventions.component.html',
   styleUrls: ['./interventions.component.css'],
-  providers:[InterventionsService]
+  providers:[PostsService]
 })
 export class InterventionsComponent implements OnInit {
   posts = [{id:1},{url:'testurl'},{title:'test'}, {info:'test'},{location:'location'},{stages:'stages'},
     {created:'created'},{image:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}];
   selectedPost: any;
 
-  constructor(private api: InterventionsService) {
+  constructor(private api: PostsService) {
     this.getInterventions();
     this.selectedPost ={id:-1, title:'', info:'', location:'', }
   }
