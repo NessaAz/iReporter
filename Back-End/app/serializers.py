@@ -77,13 +77,4 @@ class RedFlagSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ClientProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Client
-        fields = '__all__'
 
-
-class AdminProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Admin
-        fields = '__all__'

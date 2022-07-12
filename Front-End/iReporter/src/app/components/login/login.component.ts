@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
   login: any;
 
   constructor(public authService: AuthService, private router: Router) { }
-  goPost() {
-    this.router.navigate(['/', 'redflags']);
+  goProfile() {
+    this.router.navigate(['/', 'clients']);
   }
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.login).subscribe(
       response=> {
         alert('Login successfully!')
-        this.goPost()
+        this.goProfile()
       },
       error=>{
         alert('You have entered an invalid username or password!')
