@@ -8,8 +8,8 @@ import {ProfilesService} from "../../services/profiles.service";
   providers: [ProfilesService]
 })
 export class ProfilesComponent implements OnInit {
-  profiles = [{id:1},{fullname:'testname'},{bio:'bio'}, {organisation:'organisation'},
-    {location:'location'}, {profile_pic:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}];
+  profiles:any = {pos:[{id:1},{fullname:'testname'},{bio:'bio'}, {organisation:'organisation'},
+    {location:'location'}, {profile_pic:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}]};
   selectedProfile: any;
 
   constructor(private api: ProfilesService) {
@@ -31,7 +31,7 @@ export class ProfilesComponent implements OnInit {
     this.api.getOneClient(client.id).subscribe(
       data => {
         this.selectedProfile = data;
-
+          alert("you have clicked")
       },
       error => {
         console.log(error)
