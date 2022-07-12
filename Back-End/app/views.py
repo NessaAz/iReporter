@@ -3,33 +3,28 @@ from .serializers import ClientSerializer, UserSerializer, AdminSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.http import HttpResponse, JsonResponse
-from .models import RedFlag, Intervention, Admin, Client
-from .serializers import RedFlagSerializer, InterventionSerializer, ClientProfileSerializer, AdminProfileSerializer
+from .models import RedFlag, Intervention
+from .serializers import RedFlagSerializer, InterventionSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.parsers import JSONParser
+from rest_framework import permissions
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework import viewsets
+from . import models
+import cloudinary.uploader
 
 
 # Create your views here.
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
+        'api/users',
         'api/admin',
-        'api/adminprofile',
         'api/client',
-        'api/clientprofile',
         'api/token',
         'api/token/refresh/',
-        'api/flaglists',
+        'api/redflags',
         'api/interventions',
-        'api/raiseflag/<int:id>/',
-        'api/intervationrequest/<int:id>/',
-        'api/adminprofiles',
-        'api/clientsprofiles',
-        'api/admins/<int:id>/',
-        'api/clients/<int:id>/',
     ]
     return Response(routes)
 
@@ -79,153 +74,57 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view(['GET', 'POST', 'DELETE'])
-def flags_list(request, format=None):
-    if request.method == 'GET':
-        flags = RedFlag.objects.all()
-        serializer = RedFlagSerializer(flags, many=True)
-        return Response(serializer.data)
+class RedFlagViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows redflags to be viewed or edited.
+    """
+    queryset = RedFlag.objects.all()
+    serializer_class = RedFlagSerializer
+    parser_classes = (
+        MultiPartParser,
+        JSONParser,
+        FormParser
+    )
 
-    if request.method == 'POST':
-        serializer = RedFlagSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status.HTTP_201.CREATED)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def flag_detail(request, id, format=None):
-    try:
-        flag = RedFlag.objects.get(pk=id)
-    except RedFlag.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = RedFlagSerializer(flag)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = RedFlagSerializer(flag, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        flag.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+    # permission_classes = [permissions.IsAuthenticated]
+    def post(self,request, *args, **kwargs):
+        image = request.data('image')
+        title = request.data('title')
+        info = request.data('title')
+        user = request.user
+        stages = request.data('stages')
+        created = request.data('created')
+        location = request.data('location')
+        upload_data = cloudinary.uploader.upload(image)
+        RedFlag.objects.create(image=image,title=title,info=info, user=user, stages=stages, created=created,location=location)
+        return Response({
+            'status': 'success',
+            'data': upload_data,
+        }, status=201)
 
 
-@api_view(['GET', 'POST'])
-def interventions_list(request, format=None):
-    if request.method == 'GET':
+class InterventionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows interventions to be viewed or edited.
+    """
+    queryset = Intervention.objects.all()
+    serializer_class = InterventionSerializer
+    parser_classes = (
+        MultiPartParser,
+        JSONParser,
+        FormParser
+    )
+
+    # permission_classes = [permissions.IsAuthenticated]
+    def list(self, request, *args, **kwargs):
         interventions = Intervention.objects.all()
         serializer = InterventionSerializer(interventions, many=True)
         return Response(serializer.data)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = InterventionSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def intervention_detail(request, id, format=None):
-    try:
-        intervention = Intervention.objects.get(pk=id)
-    except Intervention.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = InterventionSerializer(intervention)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = InterventionSerializer(intervention, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        intervention.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['GET', 'POST'])
-def admins_list(request, format=None):
-    if request.method == 'GET':
-        admins = Admin.objects.all()
-        serializer = AdminProfileSerializer(admins, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = AdminProfileSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def admin_detail(request, id, format=None):
-    try:
-        admin = Admin.objects.get(pk=id)
-    except Admin.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = AdminProfileSerializer(admin)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = AdminProfileSerializer(admin, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        admin.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['GET', 'POST'])
-def clients_list(request, format=None):
-    if request.method == 'GET':
-        clients = Client.objects.all()
-        serializer = ClientProfileSerializer(clients, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ClientProfileSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def client_detail(request, id, format=None):
-    try:
-        client = Client.objects.get(pk=id)
-    except Client.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = ClientProfileSerializer(client)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = ClientProfileSerializer(client, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        client.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = models.User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer

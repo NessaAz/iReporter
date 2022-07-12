@@ -7,25 +7,24 @@ import {ProfilesService} from "../../services/profiles.service";
   providers: [ProfilesService]
 })
 export class ProfilesComponent implements OnInit {
-  profiles = [{id:1},{fullname:'testname'},{bio:'bio'}, {organisation:'organisation'},
-    {location:'location'}, {profile_pic:'https://res.cloudinary.com/ireporter2022/image/upload/v1656953718/crime5_r8mbnm.jpg'}];
+  users = [{id:1},{username:''},{first_name:''}, {last_name:''},{email:''}];
   selectedProfile: any;
   constructor(private api: ProfilesService) {
     this.getClientsProfiles();
-    this.selectedProfile ={id:-1, fullname:'', bio:'', location:'', }
+    this.selectedProfile ={id:'', username:'', first_name:'', last_name:'', }
   }
   getClientsProfiles=() =>{
-    this.api.getAllClient().subscribe(
+    this.api.getAllUsers().subscribe(
       data => {
-        this.profiles =data
+        this.users =data
       },
       error => {
         console.log(error)
       }
     )
   }
-  clientClicked = (client:any)=>{
-    this.api.getOneClient(client.id).subscribe(
+  clientClicked = (user:any)=>{
+    this.api.getOneUser(user.id).subscribe(
       data => {
         this.selectedProfile = data;
       },
@@ -35,7 +34,7 @@ export class ProfilesComponent implements OnInit {
     )
   }
   updateProfile =() =>{
-    this.api.updateClient(this.selectedProfile).subscribe(
+    this.api.updateUser(this.selectedProfile).subscribe(
       data => {
         this.getClientsProfiles();
         alert("profile updated successfully")
@@ -46,26 +45,7 @@ export class ProfilesComponent implements OnInit {
       }
     )
   }
-  createProfile =() =>{
-    this.api.createClient(this.selectedProfile).subscribe(
-      data => {
-        this.getClientsProfiles();
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }
-  deleteProfile =() =>{
-    this.api.deleteClient(this.selectedProfile.id).subscribe(
-      data => {
-        this.getClientsProfiles();
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }
+
   ngOnInit(): void {
   }
 }

@@ -10,7 +10,6 @@
                 <span class="side-stick"></span>
                 <h5 class="note-title text-truncate w-75 mb-0" (click)="postClicked(post)">{{post.title}} <i class="point fa fa-circle ml-1 font-10"></i></h5>
                 <p class="note-date font-small text-muted">{{post.created |time}}</p>
-                <img src="{{post.image}}" alt="">
                 <div class="note-content">
                   <p class="note-inner-content text-muted" >{{post.info}}</p>
                   <button class="btn btn-success btn-sm m-3" *ngIf="selectedPost.id != -1" (click)="updatePost()">UPDATE</button>
@@ -21,8 +20,8 @@
                   <span class="mr-1"><i class="fa fa-star favourite-note"></i></span>
                   <span class="mr-1"><i class="fa fa-trash remove-note"></i></span>
                   <div class="ml-auto">
-                    <div class="category-selector btn-group">   
-                      <a class="nav-link dropdown-toggle category-dropdown label-group p-0" data-toggle="dropdown" #status href="#" role="button" aria-haspopup="true" aria-expanded="true"> 
+                    <div class="category-selector btn-group">
+                      <a class="nav-link dropdown-toggle category-dropdown label-group p-0" data-toggle="dropdown" #status href="#" role="button" aria-haspopup="true" aria-expanded="true">
                         <div class="category">
                           <!-- <label for="status">Status</label> -->
                           <button class="btn  btn-primary status-btn btn-sm mt-3">Status</button>
