@@ -172,7 +172,7 @@ a {
   border: 2px solid #ff5050
 }
 
-.note-has-grid .single-note-item.all-category .point {
+/* .note-has-grid .single-note-item.all-category .point {
   color: rgba(82, 95, 127, .5)
 }
 
@@ -228,7 +228,7 @@ a {
 .note-has-grid .single-note-item.all-category.note-important .more-options,
 .note-has-grid .single-note-item.all-category.note-social .more-options {
   display: none
-}
+} */
 
 @media (max-width:767.98px) {
   .note-has-grid .single-note-item {

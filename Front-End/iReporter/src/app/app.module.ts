@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
@@ -13,6 +13,7 @@ import { TimePipe } from './pipes/time.pipe';
 import { LandingComponent } from './components/landing/landing.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import { AuthService, AuthInterceptor, AuthGuard } from './services/auth.service'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,15 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
         BrowserModule
     ],
 
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
