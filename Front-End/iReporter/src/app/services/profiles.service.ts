@@ -18,6 +18,9 @@ export class ProfilesService {
     return this.http.get(this.baseurl+'/users/' + id + '/', {headers: this.httpHeaders});
   }
 
+  updateClient(client:any): Observable<any>{
+    const body = {profile_pic: client.profile_pic, fullname:client.fullname, organisation:client.organisation, location:client.location, bio:client.bio }
+    return this.http.put(this.baseurl+'/clients/' + client.id + '/', body,
   updateUser(user:any): Observable<any>{
     const body = {id:user.id, username: user.username, first_name: user.last_name, email:user.email }
     return this.http.put(this.baseurl+'/users/' + user.id + '/', body,

@@ -37,6 +37,8 @@ export class ProfilesComponent implements OnInit {
     this.api.updateUser(this.selectedProfile).subscribe(
       data => {
         this.getClientsProfiles();
+          alert("profile updated successfully")
+
         alert("profile updated successfully")
       },
       error => {

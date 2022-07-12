@@ -1,4 +1,15 @@
 <div class="container rounded bg-white mt-5 mb-5">
+  <div class="row"*ngFor="let profile of profiles">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"> {{profile.fullname}} </span><span class="text-black-50">{{profile.id}}</span><span> </span></div>
+          <div class="d-flex justify-content-between align-items-center experience"><span>Edit Profile Pic</span></div><br>
+          <div class="col-md-12"><label class="labels">Click "Choose File" button to upload a file:</label></div>
+          <div class="col-md-6"><input type="file" id="myFile" name="filename"></div>
+          <div class="mt-5 text-center" ><button class="btn btn-success" (click)="clientClicked(profile.id)"  type="button">Submit </button></div>
+        </div>
+      
+
   <div class="row" >
       <div class="col-md-3 border-right" *ngFor="let user of users">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -16,6 +27,39 @@
               </div>
 
               <div class="row mt-3">
+                <form>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
+                      <label class="label" for="username">Full Name</label>
+                      <input [(ngModel)]="profile.fullname" [ngModelOptions]="{standalone: true}" type="text" #fullname class="form-control" id="fullname" placeholder="Full name">
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
+                      <label class="label" for="email">Organization</label>
+                      <input [(ngModel)]="profile.organisation" [ngModelOptions]="{standalone: true}" type="text" #organisation class="form-control" id="organisation" placeholder="Organization">
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
+                      <label class='label'for="location">Location</label>
+                      <input [(ngModel)]="profile.location" [ngModelOptions]="{standalone: true}" type="text" #location class="form-control" id="location" placeholder="Location">
+                      </div>
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 login">
+                        <label class='label'for="bio">Bio</label>
+                        <input [(ngModel)]="profile.bio" [ngModelOptions]="{standalone: true}" type="text" #bio class="form-control" id="bio" placeholder="Bio">
+                        <div class="text-center">
+                          <input type="submit" class="btn  btn-primary login-btn btn-sm mt-3" (click)="updateProfile()" value="Save Profile">
+                        </div>
+                      </div>
+                     
+                        <!-- <a routerLink="/login"> Login</a> -->
+                      
+                  </form>
+
+                 
+              </div>
+            
+             
+          </div>
+          
+
+</div>
                   <div class="col-md-12"><label class="labels">Full Name</label><input type="text"[(ngModel)]="selectedProfile.first_name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="" value=""></div>
                   <div class="col-md-12"><label class="labels">Organisation</label><input type="text" [(ngModel)]="selectedProfile.last_name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="" value=""></div>
                   <div class="col-md-12"><label class="labels">Location</label><input type="text" [(ngModel)]="selectedProfile.email" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="" value=""></div>
