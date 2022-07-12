@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.login= {username:'', password:''};
   }
   loginUser(){
-    this.authService.loginUsers(this.login).subscribe(
+    this.authService.login(this.login).subscribe(
       response=> {
         alert('Login successfully!')
         this.goProfile()
