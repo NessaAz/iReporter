@@ -12,6 +12,7 @@ import { InterventionsComponent } from './components/interventions/interventions
 import { TimePipe } from './pipes/time.pipe';
 import { LandingComponent } from './components/landing/landing.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     TimePipe,
     LandingComponent,
     ProfilesComponent,
+    DashboardComponent,
   ],
     imports: [
         AppRoutingModule,
