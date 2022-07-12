@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class ProfilesService {
 
-  baseurl=  "http://127.0.0.1:8000/api";
+  baseurl=  "https://ireportermoringa.herokuapp.com/api";
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http:HttpClient) { }
 
@@ -18,9 +18,6 @@ export class ProfilesService {
     return this.http.get(this.baseurl+'/users/' + id + '/', {headers: this.httpHeaders});
   }
 
-  updateClient(client:any): Observable<any>{
-    const body = {profile_pic: client.profile_pic, fullname:client.fullname, organisation:client.organisation, location:client.location, bio:client.bio }
-    return this.http.put(this.baseurl+'/clients/' + client.id + '/', body,
   updateUser(user:any): Observable<any>{
     const body = {id:user.id, username: user.username, first_name: user.last_name, email:user.email }
     return this.http.put(this.baseurl+'/users/' + user.id + '/', body,
