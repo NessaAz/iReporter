@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpInterceptor, HttpHeaders, HttpRequest, HttpHandler, HttpEvent,HttpResponse } from '@angular/common/http';
 import { CanActivate, Router } from '@angular/router';
-
+// import { User } from '../interface/user';
 
 import { tap, shareReplay } from 'rxjs/operators';
 
 import jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 
-// import { environment } from '../environments/environment';
+const options = {
 
+  headers: new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Authorization', 'Bearer ' + localStorage.getItem("access_token"))
+
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  base_url = 'https://ireportermoringa.herokuapp.com/api/'
-
+  base_url = "http://127.0.0.1:8000"
+ 
   constructor(private http:HttpClient) { }
   registerUser(userData:any): Observable<any>{
-    return this.http.post('https://ireportermoringa.herokuapp.com/api/client', userData);
+    return this.http.post('http://127.0.0.1:8000/api/client', userData);
   }
+  
   registerAdmin(userData:any): Observable<any>{
-    return this.http.post('https://ireportermoringa.herokuapp.com/api/admin', userData);
+    return this.http.post('http://127.0.0.1:8000/api/admin', userData);
   }
-  // loginUsers(userData:any): Observable<any>{
-  //   return this.http.post('https://ireportermoringa.herokuapp.com/api/token', userData);
-  // }
 
   private setSession(access_token:string) {
-    // const token = authResult.token;
     const payload = jwtDecode <JWTPayload>(access_token);
     const expiresAt = moment.unix(payload.exp);
 
@@ -46,15 +48,16 @@ export class AuthService {
     return localStorage.getItem('refresh_token')|| '{}';
   }
 
-  login(userPayLoad: any):Observable<any> {
-    return this.http.post<logInResponse>('${this.base_url}token',userPayLoad).pipe(
-      tap(response => {
-        this.setSession(response.access_token)
-        localStorage.setItem('refresh_token', response.refresh_token)
-      }),
-      shareReplay(),
-    )
+  login(userPayLoad :any ) {
+    const url = this.base_url+"/api/token";
+    
+    const options = {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+    }
+    return this.http.post(url, userPayLoad, options);
   }
+ 
 
   logout() {
     localStorage.removeItem('token');
@@ -63,7 +66,7 @@ export class AuthService {
 
   refreshToken() {
     if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
-      this.http.post<refreshResponse>('${this.base_url}token/refresh/',{refresh: this.refresh_token})
+      this.http.post<refreshResponse>('${this.base_url}/api/token/refresh/',{refresh: this.refresh_token})
       .pipe(
         tap(response => this.setSession(response.access)),
         shareReplay(),
@@ -128,12 +131,15 @@ interface JWTPayload {
   email: string;
   exp: number;
 }
-interface logInResponse {
-  access_token: string;
-  refresh_token: string;
-  user: object;
-}
+
 interface refreshResponse {
   access: string;
   refresh: string;
+}
+interface User{
+  id: number,
+  username: string,
+  first_name: string,
+  last_name: string,
+  email: string,
 }

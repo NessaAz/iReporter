@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
   providers: [AuthService]
 })
+
 export class LoginComponent implements OnInit {
   login: any;
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.authService.login(this.login).subscribe(
       response=> {
-        alert('Login successfully!')
+        alert('Login successfull!')
         this.goProfile()
       },
       error=>{
