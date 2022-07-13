@@ -1,3 +1,6 @@
+.login-page{
+    background-color: white;
+}
 h1,
 h2,
 h3,
@@ -13,14 +16,14 @@ h6 {
 .login-body {
     width: 350px;
     margin-top: 22%;
-    margin-left: 35%;
+    margin-left: 20%;
     padding-top: 10%;
     padding: 7%;
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
-    /* background-color: #C7C7BB; */
+   
 }
 .login-btn {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Oxygen', sans-serif;
     font-size: small;
     font-weight: 600;
     width: 120px;
@@ -61,4 +64,12 @@ img{
     width: 520px;
     padding-bottom: 12px; 
     margin-right: 20%;
+  }
+
+
+  /* media */
+  @media (min-width: 40em) {
+    .login-body {
+      text-align: left;
+    }
   }
