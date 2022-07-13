@@ -109,6 +109,7 @@
 /* article */
 .articles {
     background-color: #FAEDCD;
+    color: black;
   }
   
   .article__grid {
