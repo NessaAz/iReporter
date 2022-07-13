@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class PostsService {
 
-  baseurl=  "https://ireportermoringa.herokuapp.com/api";
+  baseurl=  "http://127.0.0.1:8000/api";
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http:HttpClient) { }
   getAllRedFlags(): Observable<any>{
