@@ -62,3 +62,11 @@ img{
     padding-bottom: 12px; 
     margin-right: 20%;
   }
+
+
+  /* media */
+  @media (min-width: 40em) {
+    .login-body {
+      text-align: left;
+    }
+  }
