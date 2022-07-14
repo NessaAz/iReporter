@@ -31,12 +31,12 @@
 
 ## Authors
 
-* **Vanessa Azenwa Shiundu** - *Initial work* - [NessaAz](https://github.com/NessaAz)
+* **Vanessa Azenwa Shiundu** - *Scrum master* - [NessaAz](https://github.com/NessaAz)
 
-* **Lilian Mwaura** - *Initial work* - [LilianMwaura](https://github.com/LilianMwaura)
-* **Adnan Kibe** - *Initial work* - [AdnanK1](https://github.com/AdnanK1)
-* **Ian Koech** - *Initial work* - [IanoSang](https://github.com/IanoSang)
-* **Adeline Makokha** *Initial work* - [adeline-pepela](https://github.com/adeline-pepela)
+* **Lilian Mwaura** - *Collaborator* - [LilianMwaura](https://github.com/LilianMwaura)
+* **Adnan Kibe** - *Collaborator* - [AdnanK1](https://github.com/AdnanK1)
+* **Ian Koech** - *Collaborator* - [IanoSang](https://github.com/IanoSang)
+* **Adeline Makokha** *Collaborator* - [adeline-pepela](https://github.com/adeline-pepela)
 
 ## License
 This project is licensed under the MIT License  
