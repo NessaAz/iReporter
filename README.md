@@ -4,7 +4,7 @@
 ## Getting Started
 * click on and navigate to the sign in page to create an account
 * alternatively you can browse and sign up later
-* After account creation, a user is able to create objects and render them
+* After account creation, a user can navigate to the red flags or interventions pages and create/ update/ delete a redflag or an intervention respectively. 
 
 ### Prerequisites
 * install django 4.0.4 - for back-end
