@@ -24,7 +24,7 @@
 * [django](https://www.djangoproject.com/) - The web framework used for back-end
 * *pip*- Dependency Management
 * [heroku](https://www.heroku.com/home) - Used to deploy backe-end
-* Postgres
+* Postgres for database
 
 ## Contributing
 * fork the repository and commit the changes under a new-contributing branch for versioning
@@ -32,14 +32,11 @@
 ## Authors
 
 * **Vanessa Azenwa Shiundu** - *Initial work* - [NessaAz](https://github.com/NessaAz)
-* **Lilian Mwaura** - *Initial work* - [LilianMwaura]
-(https://github.com/LilianMwaura)
-* **Adnan Kibe** - *Initial work* - [AdnanK1]
-(https://github.com/AdnanK1)
-* **Ian Koech** - *Initial work* - [IanoSang]
-(https://github.com/IanoSang)
-* **Adeline Makokha** *Initial work* - [adeline-pepela]
-(https://github.com/adeline-pepela)
+
+* **Lilian Mwaura** - *Initial work* - [LilianMwaura](https://github.com/LilianMwaura)
+* **Adnan Kibe** - *Initial work* - [AdnanK1](https://github.com/AdnanK1)
+* **Ian Koech** - *Initial work* - [IanoSang](https://github.com/IanoSang)
+* **Adeline Makokha** *Initial work* - [adeline-pepela](https://github.com/adeline-pepela)
 
 ## License
 This project is licensed under the MIT License  
